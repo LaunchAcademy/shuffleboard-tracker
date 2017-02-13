@@ -5,7 +5,16 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.whenScoreUpdated = this.whenScoreUpdated.bind(this)
-    this.state = {
+    this.resetGame = this.resetGame.bind(this)
+    this.state = {}
+  }
+
+  componentWillMount(){
+    this.resetGame()
+  }
+
+  resetGame(){
+    this.setState({
       red: {
         score: 0,
         name: 'Red'
@@ -14,7 +23,7 @@ class App extends Component {
         score: 0,
         name: 'Blue'
       }
-    }
+    })
   }
 
   whenScoreUpdated(teamName, pointsToAdd) {
@@ -37,6 +46,7 @@ class App extends Component {
   render(){
     return (
       <div>
+        <button onClick={this.resetGame}>New Game</button>
         <TeamScore team={this.state.red} whenScoreUpdated={this.whenScoreUpdated} />
         <TeamScore team={this.state.blue} whenScoreUpdated={this.whenScoreUpdated} />
       </div>
